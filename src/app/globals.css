@@ -1,48 +1,90 @@
 @import "tailwindcss";
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/*
+  CALORIETRACK DESIGN SYSTEM
+  ===========================
+
+  Visual Design Reference: ai-generated-preview.png
+
+  PRIMARY COLORS:
+  - Ocean Blue (#4A90E2 / HSL: 207, 70%, 59%) - Headers, CTAs, Primary Actions
+  - Sage Green (#7ED321 / HSL: 84, 76%, 49%) - Progress Indicators, Success States
+  - Warm White (#F8F9FA / HSL: 210, 17%, 98%) - Backgrounds, Cards
+
+  TYPOGRAPHY:
+  - Headers: 24px / 1.5rem (600 weight)
+  - Body: 16px / 1rem (400 weight)
+  - Labels: 14px / 0.875rem (500 weight)
+
+  SPACING SYSTEM:
+  - Base: 8px grid system
+  - Card padding: 24px (3 * 8px)
+  - Section gaps: 32px (4 * 8px)
+
+  COMPONENT PATTERNS:
+  - Cards: White background, subtle shadow (0 2px 8px rgba(0,0,0,0.08))
+  - Buttons: 44px min height, rounded corners (8px)
+  - Images: Rounded corners (12px), subtle borders
+
+  All colors MUST be HSL.
 */
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+  /* Base Colors */
+  --background: 210 17% 98%;
+  --foreground: 220 10% 20%;
 
+  /* Card System */
   --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
+  --card-foreground: 220 10% 20%;
 
+  /* Popover */
   --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
+  --popover-foreground: 220 10% 20%;
 
-  --primary: 222.2 47.4% 11.2%;
-  --primary-foreground: 210 40% 98%;
+  /* Primary - Ocean Blue (#4A90E2) */
+  --primary: 207 70% 59%;
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
+  /* Secondary - Sage Green (#7ED321) */
+  --secondary: 84 76% 49%;
+  --secondary-foreground: 0 0% 100%;
 
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
+  /* Muted Colors */
+  --muted: 210 20% 96%;
+  --muted-foreground: 220 10% 50%;
 
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
+  /* Accent - Light Green Tint */
+  --accent: 84 60% 95%;
+  --accent-foreground: 84 76% 35%;
 
+  /* Destructive - Error Red */
   --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
+  --destructive-foreground: 0 0% 100%;
 
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 222.2 84% 4.9%;
+  /* Borders & Inputs */
+  --border: 220 15% 88%;
+  --input: 220 15% 90%;
+  --ring: 207 70% 59%;
 
+  /* Border Radius */
   --radius: 0.5rem;
 
-  --sidebar-background: 0 0% 98%;
-  --sidebar-foreground: 240 5.3% 26.1%;
-  --sidebar-primary: 240 5.9% 10%;
-  --sidebar-primary-foreground: 0 0% 98%;
-  --sidebar-accent: 240 4.8% 95.9%;
-  --sidebar-accent-foreground: 240 5.9% 10%;
-  --sidebar-border: 220 13% 91%;
-  --sidebar-ring: 217.2 91.2% 59.8%;
+  /* CalorieTrack Specific Colors */
+  --ocean-blue: 207 70% 59%;
+  --sage-green: 84 76% 49%;
+  --progress-green: 140 65% 50%;
+  --warning-yellow: 45 93% 47%;
+
+  /* Sidebar (Bottom Nav on Mobile) */
+  --sidebar-background: 0 0% 100%;
+  --sidebar-foreground: 220 10% 30%;
+  --sidebar-primary: 207 70% 59%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 210 20% 96%;
+  --sidebar-accent-foreground: 220 10% 30%;
+  --sidebar-border: 220 15% 88%;
+  --sidebar-ring: 207 70% 59%;
 }
 
 .dark {
@@ -160,4 +202,83 @@ All colors MUST be HSL.
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* CalorieTrack Custom Animations */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes progress-fill {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+.animate-progress-fill {
+  animation: progress-fill 1s ease-out forwards;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 640px) {
+  .responsive-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Safe area for mobile devices */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Touch-friendly tap targets */
+@media (max-width: 768px) {
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }

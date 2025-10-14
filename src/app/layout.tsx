@@ -6,6 +6,7 @@ import { QueryProvider } from "@/components/query-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { BottomNavigation } from "@/components/bottom-navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,8 +19,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Elegant Flora Boutique",
-  description: "Beautiful AI-powered website creation platform",
+  title: "CalorieTrack - Effortless Calorie Tracking",
+  description: "Track your calories instantly with photo recognition. Achieve your health goals with CalorieTrack.",
 };
 
 export default function RootLayout({
@@ -38,12 +39,15 @@ export default function RootLayout({
         <QueryProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="light"
             enableSystem
             disableTransitionOnChange
           >
             <TooltipProvider>
-              {children}
+              <div className="pb-20">
+                {children}
+              </div>
+              <BottomNavigation />
               <Toaster />
               <Sonner />
             </TooltipProvider>
